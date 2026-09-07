@@ -67,7 +67,7 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
     app.job_queue.run_daily(
         send_daily_image,
-        time=time(hour=6, minute=48, tzinfo=TIMEZONE),
+        time=time(hour=6, minute=0, tzinfo=TIMEZONE),
         name="daily_image"
     )
     app.run_polling()
