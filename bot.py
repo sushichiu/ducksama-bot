@@ -14,7 +14,6 @@ STATE_FILE = "state.txt"
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-
 def get_images():
     if not os.path.exists(IMAGES_DIR):
         os.makedirs(IMAGES_DIR)
@@ -53,7 +52,7 @@ async def send_daily_image(context: ContextTypes.DEFAULT_TYPE):
 
     try:
         with open(image_path, "rb") as photo:
-            await context.bot.send_photo(chat_id=GROUP_CHAT_ID, photo=photo)
+           await context.bot.send_photo(chat_id=GROUP_CHAT_ID, photo=photo, message_thread_id=1)
         save_index(index + 1)
         logger.info("Sent!")
     except Exception as e:
