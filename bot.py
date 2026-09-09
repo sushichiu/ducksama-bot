@@ -60,11 +60,13 @@ async def send_daily_image(context: ContextTypes.DEFAULT_TYPE):
         logger.error(f"Failed: {e}")
 
 
-def main():
-    print("Bot is running! Sending 1 pic daily at 6:00 AM Iran time.")
-    print("Press Ctrl+C to stop.\n")
+async def post_init(application: Application):
+    logger.info("Bot started! Sending 1 pic daily at 6:00 AM Iran time.")
+    await send_daily_image(application)
 
-    app = Application.builder().token(BOT_TOKEN).build()
+
+def main():
+    app = Application.builder().token(BOT_TOKEN).post_init(post_init).build()
     app.job_queue.run_daily(
         send_daily_image,
         time=time(hour=6, minute=0, tzinfo=TIMEZONE),
