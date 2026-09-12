@@ -16,18 +16,15 @@ logger = logging.getLogger(__name__)
 
 
 def get_images():
-    logger.info(f"Looking for images in: {os.getcwd()}/{IMAGES_DIR}")
+    logger.info(f"Looking in: {os.getcwd()}/{IMAGES_DIR}")
     if not os.path.exists(IMAGES_DIR):
-        logger.info("Images folder does not exist, creating it...")
         os.makedirs(IMAGES_DIR)
         return []
-    
     all_files = os.listdir(IMAGES_DIR)
-    logger.info(f"All files in images folder: {all_files}")
-    
+    logger.info(f"Files found: {all_files}")
     supported = (".jpg", ".jpeg", ".png", ".gif", ".webp")
     images = sorted([f for f in all_files if f.lower().endswith(supported)])
-    logger.info(f"Found {len(images)} images: {images}")
+    logger.info(f"Images found: {len(images)}")
     return images
 
 
@@ -69,7 +66,6 @@ async def send_daily_image(context: ContextTypes.DEFAULT_TYPE):
 
 
 async def post_init(application: Application):
-    logger.info("Bot started!")
     await send_daily_image(application)
 
 
@@ -77,7 +73,7 @@ def main():
     app = Application.builder().token(BOT_TOKEN).post_init(post_init).build()
     app.job_queue.run_daily(
         send_daily_image,
-        time=time(hour=15, minute=10, tzinfo=TIMEZONE),
+        time=time(hour=14, minute=25, tzinfo=TIMEZONE),
         name="daily_image"
     )
     app.run_polling(drop_pending_updates=True)
