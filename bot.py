@@ -147,7 +147,7 @@ async def send_daily_image(context: ContextTypes.DEFAULT_TYPE):
         urllib.request.urlretrieve(image_url, temp_path)
         logger.info(f"Sending: {image_name}")
         with open(temp_path, "rb") as photo:
-            await context.bot.send_photo(chat_id=GROUP_CHAT_ID, photo=photo, message_thread_id=1)
+          await context.bot.send_photo(chat_id=GROUP_CHAT_ID, photo=photo)
         save_index(index + 1)
         logger.info("Sent!")
         os.remove(temp_path)
