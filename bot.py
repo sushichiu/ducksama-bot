@@ -60,7 +60,7 @@ async def send_daily_image(context: ContextTypes.DEFAULT_TYPE):
 
 
 async def post_init(application: Application):
-    logger.info("Bot started! Sending 1 pic daily at 6:00 AM Iran time.")
+    logger.info("Bot started! Sending 1 pic daily at 7:00 AM Iran time.")
     await send_daily_image(application)
 
 
