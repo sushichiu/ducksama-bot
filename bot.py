@@ -160,7 +160,7 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
     app.job_queue.run_daily(
         send_daily_image,
-        time=time(hour=15, minute=45, tzinfo=TIMEZONE),
+        time=time(hour=15, minute=48, tzinfo=TIMEZONE),
         name="daily_image"
     )
     app.run_polling(drop_pending_updates=True)
